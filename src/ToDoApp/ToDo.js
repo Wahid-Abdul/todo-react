@@ -7,7 +7,7 @@ let ToDo = () => {
   const [newTask, setNewTask] = useState();
   const [toDoList, setToDoList] = useState([]);
 
-  let addTask = toDoList => {
+  let addTask = () => {
     let toDo = [...toDoList];
     var found = toDo.find(
       element => element.name === newTask
@@ -16,55 +16,66 @@ let ToDo = () => {
       alert("The task is already available in your list");
       return;
     }
-    if(newTask){
+    if (newTask) {
       toDo.push({ name: newTask, isChecked: false });
       setToDoList(toDo);
-  
+
     }
   };
 
-  useEffect( () => {
-     let localTODO = localStorage.getItem(LOCAL_TODO)
-    if(localTODO){
+  useEffect(() => {
+    let localTODO = localStorage.getItem(LOCAL_TODO)
+    if (localTODO) {
       setToDoList(JSON.parse(localTODO))
-    } 
+    }
   }, [])
 
-  useEffect( () => {
-    localStorage.setItem(LOCAL_TODO, JSON.stringify(toDoList) )
+  useEffect(() => {
+    localStorage.setItem(LOCAL_TODO, JSON.stringify(toDoList))
   }, [toDoList])
+
+  let search = (event) => {
+    if (event.keyCode == 13) {
+      addTask()
+    }
+  }
 
 
   let changeChecked = (e, name) => {
-    
+
     let toDo = [...toDoList];
     let isChecked = e.target.checked
     toDo = toDo.map(obj =>
       obj.name === name ? { ...obj, isChecked } : obj
     );
     setToDoList(toDo)
-  
+
   }
   return (
-    <div>
-      {toDoList.map(item => (
-        <ToDoItem
-          name={item.name}
-          key={item.name}
-          isChecked={item.isChecked}
-          changeChecked={changeChecked}
-        />
-      ))}
+    <>
+      <div className="row">
 
-      <input onChange={e => setNewTask(e.target.value)} />
-      <button
+        {toDoList.map(item => (
+          <ToDoItem
+            name={item.name}
+            key={item.name}
+            isChecked={item.isChecked}
+            changeChecked={changeChecked}
+
+          />
+        ))}
+
+
+      </div>
+      <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} />
+      <button className=""
         onClick={() => {
-          addTask(toDoList);
+          addTask();
         }}
       >
         Add a task
-      </button>
-    </div>
+     </button>
+    </>
   );
 };
 
