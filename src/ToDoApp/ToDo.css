@@ -1,0 +1,12 @@
+.container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.space-items {
+    /* justify-content: space-evenly; */
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}

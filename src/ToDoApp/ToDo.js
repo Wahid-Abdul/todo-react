@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem/ToDoItem";
+import './ToDo.css'
 
 const LOCAL_TODO = "TO_DO_LIST"
 let ToDo = () => {
@@ -35,7 +36,7 @@ let ToDo = () => {
   }, [toDoList])
 
   let search = (event) => {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       addTask()
     }
   }
@@ -51,9 +52,23 @@ let ToDo = () => {
     setToDoList(toDo)
 
   }
+
+  let removeItem = (name) => {
+    let toDo = [...toDoList];
+    let indexDel;
+    toDo.map((obj, index) => {
+      if (obj.name === name) {
+        indexDel = index
+        return
+      }
+    }
+    );
+    toDo.splice(indexDel, 1)
+    setToDoList(toDo)
+  }
   return (
-    <>
-      <div className="row">
+    <div>
+      <div className="row space-items">
 
         {toDoList.map(item => (
           <ToDoItem
@@ -61,21 +76,20 @@ let ToDo = () => {
             key={item.name}
             isChecked={item.isChecked}
             changeChecked={changeChecked}
-
+            removeItem={removeItem}
           />
         ))}
-
-
       </div>
-      <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} />
-      <button className=""
-        onClick={() => {
-          addTask();
-        }}
-      >
-        Add a task
+      <div className="container">
+        <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} />
+        <button className=""
+          onClick={addTask}
+        >
+          Add a task
      </button>
-    </>
+      </div>
+
+    </div>
   );
 };
 

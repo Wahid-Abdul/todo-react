@@ -1,0 +1,45 @@
+*:focus {
+    outline: none;
+}
+
+.row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: lightcyan;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.row-wrap {
+    padding-right: 10px;
+}
+
+.close-button {
+    height: 100%;
+    width: 20px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.close-button :hover {
+    cursor: pointer;
+    background-color: bisque;
+    outline: none;
+}
+
+*.unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
