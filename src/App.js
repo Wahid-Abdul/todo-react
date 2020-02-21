@@ -10,3 +10,5 @@ let App = () => {
 }
 
 export default App;
+
+// To deploy to github pages, use $npm run deploy
