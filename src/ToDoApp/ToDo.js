@@ -24,6 +24,10 @@ let ToDo = () => {
     }
   };
 
+  let clearTasks = () => {
+    setToDoList([]);
+  }
+
   useEffect(() => {
     let localTODO = localStorage.getItem(LOCAL_TODO)
     if (localTODO) {
@@ -67,7 +71,7 @@ let ToDo = () => {
     setToDoList(toDo)
   }
   return (
-    <div>
+    <>
       <div className="row space-items">
 
         {toDoList.map(item => (
@@ -81,15 +85,27 @@ let ToDo = () => {
         ))}
       </div>
       <div className="container">
-        <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} />
-        <button className=""
-          onClick={addTask}
-        >
-          Add a task
-     </button>
-      </div>
+        <div className="input-container">
+          <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} className="task-input" />
+        </div>
 
-    </div>
+        <div className="button-container">
+          <button className="base-button clear-button"
+            onClick={clearTasks}
+          >
+            CLEAR ALL
+          </button>
+          <button className=" base-button add-button"
+            onClick={addTask}
+          >
+            ADD A TASK
+          </button>
+
+
+        </div>
+
+      </div>
+    </>
   );
 };
 
