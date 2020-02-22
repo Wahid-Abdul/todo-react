@@ -58,6 +58,7 @@ let ToDo = () => {
   }
 
   let removeItem = (name) => {
+
     let toDo = [...toDoList];
     let indexDel;
     toDo.map((obj, index) => {
@@ -70,6 +71,7 @@ let ToDo = () => {
     toDo.splice(indexDel, 1)
     setToDoList(toDo)
   }
+  
   return (
     <>
       <div className="row space-items">
@@ -89,13 +91,13 @@ let ToDo = () => {
           <input onChange={e => setNewTask(e.target.value)} onKeyDown={search} className="task-input" />
         </div>
 
-        <div className="button-container">
-          <button className="base-button clear-button"
+        <div className=" row button-container">
+          <button className="base-button clear-button col-3 col-s-12"
             onClick={clearTasks}
           >
             CLEAR ALL
           </button>
-          <button className=" base-button add-button"
+          <button className=" base-button add-button col-3 col-s-12"
             onClick={addTask}
           >
             ADD A TASK
