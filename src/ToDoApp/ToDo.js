@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem/ToDoItem";
 import './ToDo.css'
+import { launch_toast } from "../common/utils";
 
 const LOCAL_TODO = "TO_DO_LIST"
 let ToDo = () => {
@@ -25,6 +26,7 @@ let ToDo = () => {
   };
 
   let clearTasks = () => {
+    // launch_toast("Message")
     setToDoList([]);
   }
 
