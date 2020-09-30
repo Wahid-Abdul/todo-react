@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ToDoItem.css'
 let ToDoItem = ({ name, isChecked, changeChecked, removeItem }) => {
 

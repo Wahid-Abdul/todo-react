@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem/ToDoItem";
 import './ToDo.css'
-import { launch_toast } from "../common/utils";
 
 const LOCAL_TODO = "TO_DO_LIST"
-let ToDo = () => {
+const CLEAR_ALL_TASKS = "All your tasks have been cleared."
+let ToDo = (props) => {
 
   const [newTask, setNewTask] = useState();
-  const [toDoList, setToDoList] = useState([]);
+  const [toDoList, setToDoListState] = useState([]);
+  const [backupToDoList, setBackupToDoList] = useState([]);
+
+  console.log('backupToDoList changed 1', toDoList)
+
+
+  let setToDoList = (toDoList) => {
+
+    console.log('backupToDoList changed ', toDoList)
+    setBackupToDoList(toDoList)
+    setToDoListState(toDoList)
+    console.log(backupToDoList)
+
+  }
 
   let addTask = () => {
     let toDo = [...toDoList];
@@ -26,8 +39,8 @@ let ToDo = () => {
   };
 
   let clearTasks = () => {
-    // launch_toast("Message")
-    setToDoList([]);
+    props.launch_toast(CLEAR_ALL_TASKS)
+    setToDoListState([]);
   }
 
   useEffect(() => {
@@ -40,6 +53,10 @@ let ToDo = () => {
   useEffect(() => {
     localStorage.setItem(LOCAL_TODO, JSON.stringify(toDoList))
   }, [toDoList])
+
+  useEffect(() => {
+    if (backupToDoList.length > 0) setToDoList(backupToDoList)
+  }, [props.undoFlag])
 
   let search = (event) => {
     if (event.keyCode === 13) {
@@ -73,7 +90,7 @@ let ToDo = () => {
     toDo.splice(indexDel, 1)
     setToDoList(toDo)
   }
-  
+
   return (
     <>
       <div className="row space-items">
