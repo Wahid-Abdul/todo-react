@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem/ToDoItem";
 import './ToDo.css'
+import SavePopup from "./SavePopup";
 
 const LOCAL_TODO = "TO_DO_LIST"
 const CLEAR_ALL_TASKS = "All your tasks have been cleared."
@@ -97,6 +98,18 @@ let ToDo = (props) => {
   const disbaleClearAll = toDoList.length === 0;
   return (
     <>
+      <SavePopup
+        toDoList={toDoList}
+      >
+      </SavePopup>
+      <div className="header container">
+        <a className="button" href="#popup1">
+          <button className="saveFileView">
+            SAVE
+          </button>
+        </a>
+        <div className="saveFileView">UPLOAD</div>
+      </div>
       <div className="row space-items">
 
         {

@@ -11,13 +11,13 @@
     padding-right: 20px;
 }
 
-input {
+input.task-input {
     border: none;
     outline: none;
     border-bottom: 1px solid rgba(55, 55, 55, 0.3);
 }
 
-input:focus {
+input.task-input:focus {
     border-bottom: 1px solid blueviolet;
 }
 
@@ -51,7 +51,7 @@ input:focus {
 }
 
 .clear-button-disabled {
-    background-color:#808080;
+    background-color: #808080;
 }
 
 .clear-button:active {
@@ -74,4 +74,105 @@ input:focus {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+}
+
+a.button {
+    text-decoration: none;
+}
+
+.header {
+    /* height: 200; */
+    width: 100%;
+    background-color: rgba(16, 44, 17, 1);
+    /* background-color:black; */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.saveFileView {
+    all: unset;
+    text-decoration: none;
+    border: 2px solid seashell;
+    margin: 10px 0 10px 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: white;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 0px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 60%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content:center */
+}
+
+.popup .close {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    /* align-items: center; */
+}
+
+.popup .close:hover {
+    color: #06D85F;
+}
+
+.filename {
+    width: 100%;
+    border: 1px solid rgb(209, 199, 199);
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.append-date-text {
+    font-size: 0.8em;
+    font-style: oblique;
+}
+
+.date-toggle {
+    /* background: #ff0038; */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.popup-header {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
