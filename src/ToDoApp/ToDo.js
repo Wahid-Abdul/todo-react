@@ -11,16 +11,11 @@ let ToDo = (props) => {
   const [backupToDoList, setBackupToDoList] = useState([]);
   const [shakeItemIndex, setShakeItemIndex] = useState(-1);
 
-  console.log('backupToDoList changed 1', toDoList)
-
 
   let setToDoList = (toDoList) => {
 
-    console.log('backupToDoList changed ', toDoList)
     setBackupToDoList(toDoList)
     setToDoListState(toDoList)
-    console.log(backupToDoList)
-
   }
 
   let addTask = () => {
@@ -46,20 +41,21 @@ let ToDo = (props) => {
     setToDoListState([]);
   }
 
-  useEffect(() => {
+  let getSavedItems = () => {
     let localTODO = localStorage.getItem(LOCAL_TODO)
     if (localTODO) {
       setToDoList(JSON.parse(localTODO))
     }
-  }, [])
+  }
 
-  useEffect(() => {
+  let saveItems = () => {
     localStorage.setItem(LOCAL_TODO, JSON.stringify(toDoList))
-  }, [toDoList])
+  }
 
-  useEffect(() => {
+  let undoClearAll = () => {
     if (backupToDoList.length > 0) setToDoList(backupToDoList)
-  }, [props.undoFlag])
+  }
+
 
   let search = (event) => {
     if (event.keyCode === 13) {
@@ -94,7 +90,11 @@ let ToDo = (props) => {
     setToDoList(toDo)
   }
 
-  const disbaleClearAll = toDoList.length == 0;
+  useEffect(getSavedItems, [])
+  useEffect(saveItems, [toDoList])
+  useEffect(undoClearAll, [props.undoFlag])
+
+  const disbaleClearAll = toDoList.length === 0;
   return (
     <>
       <div className="row space-items">

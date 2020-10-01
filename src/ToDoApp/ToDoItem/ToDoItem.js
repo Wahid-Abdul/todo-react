@@ -4,7 +4,7 @@ let ToDoItem = ({ name, isChecked, changeChecked, removeItem, shakeItemIndex, in
 
   return (
     <div className="col-s-12 col-5 row-wrap">
-      <div className={`row-item  ${(shakeItemIndex == index) ? 'shake-animation row-item-duplicate' : null}`}>
+      <div className={`row-item  ${(shakeItemIndex === index) ? 'shake-animation row-item-duplicate' : null}`}>
         <label>
           <input type="checkbox" checked={isChecked} onChange={(e) => { changeChecked(e, name) }} /> {name}
         </label>
