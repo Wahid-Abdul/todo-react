@@ -9,6 +9,7 @@ let ToDo = (props) => {
   const [newTask, setNewTask] = useState();
   const [toDoList, setToDoListState] = useState([]);
   const [backupToDoList, setBackupToDoList] = useState([]);
+  const [shakeItemIndex, setShakeItemIndex] = useState(-1);
 
   console.log('backupToDoList changed 1', toDoList)
 
@@ -23,12 +24,14 @@ let ToDo = (props) => {
   }
 
   let addTask = () => {
+
     let toDo = [...toDoList];
-    var found = toDo.find(
-      element => element.name === newTask
-    );
-    if (found) {
-      alert("The task is already available in your list");
+    var foundIndex = toDo.findIndex(element => element.name === newTask);
+    if (foundIndex > -1) {
+      setShakeItemIndex(foundIndex)
+      setTimeout(() => {
+        setShakeItemIndex(-1)
+      }, 1000);
       return;
     }
     if (newTask) {
@@ -96,15 +99,19 @@ let ToDo = (props) => {
     <>
       <div className="row space-items">
 
-        {toDoList.map(item => (
-          <ToDoItem
-            name={item.name}
-            key={item.name}
-            isChecked={item.isChecked}
-            changeChecked={changeChecked}
-            removeItem={removeItem}
-          />
-        ))}
+        {
+          toDoList.map((item, index) => (
+            <ToDoItem
+              name={item.name}
+              key={item.name}
+              isChecked={item.isChecked}
+              changeChecked={changeChecked}
+              removeItem={removeItem}
+              index={index}
+              shakeItemIndex={shakeItemIndex}
+            />
+          ))
+        }
       </div>
       <div className="container">
         <div className="input-container">

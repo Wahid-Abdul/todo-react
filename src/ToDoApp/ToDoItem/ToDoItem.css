@@ -13,6 +13,10 @@
     border-radius: 10px;
 }
 
+.row-item-duplicate {
+    background-color: rgb(241, 105, 128);
+}
+
 .row-wrap {
     padding-right: 10px;
 }
