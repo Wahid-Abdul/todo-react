@@ -91,6 +91,7 @@ let ToDo = (props) => {
     setToDoList(toDo)
   }
 
+  const disbaleClearAll = toDoList.length == 0;
   return (
     <>
       <div className="row space-items">
@@ -111,8 +112,9 @@ let ToDo = (props) => {
         </div>
 
         <div className=" row button-container">
-          <button className="base-button clear-button col-3 col-s-12"
+          <button className={`base-button clear-button col-3 col-s-12 ${disbaleClearAll ? 'clear-button-disabled' : 'clear-button'}`}
             onClick={clearTasks}
+            disabled={disbaleClearAll ? true : false}
           >
             CLEAR ALL
           </button>

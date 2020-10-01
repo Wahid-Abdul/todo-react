@@ -50,6 +50,10 @@ input:focus {
     background-color: red;
 }
 
+.clear-button-disabled {
+    background-color:#808080;
+}
+
 .clear-button:active {
     background-color: crimson;
 }
