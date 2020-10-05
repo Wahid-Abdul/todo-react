@@ -17,7 +17,7 @@ let SavePopup = ({ toDoList }) => {
         export2txt(name, toDoList)
     }
     return (
-        <div id="popup1" className="overlay">
+        <div id="savePopup" className="overlay">
             <div className="popup">
                 <a className="close" href="#">&times;</a>
                 <div className="popup-header">

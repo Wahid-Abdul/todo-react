@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ToDoItem from "./ToDoItem/ToDoItem";
 import './ToDo.css'
 import SavePopup from "./SavePopup";
+import UploadPopup from "./UploadPopup";
 
 const LOCAL_TODO = "TO_DO_LIST"
 const CLEAR_ALL_TASKS = "All your tasks have been cleared."
@@ -49,8 +50,13 @@ let ToDo = (props) => {
     }
   }
 
-  let saveItems = () => {
-    localStorage.setItem(LOCAL_TODO, JSON.stringify(toDoList))
+  let saveItems = (saveList = toDoList) => {
+    localStorage.setItem(LOCAL_TODO, JSON.stringify(saveList))
+  }
+
+  let updateImportedList = (saveList) => {
+    setToDoList(saveList)
+    saveItems(saveList)
   }
 
   let undoClearAll = () => {
@@ -63,7 +69,6 @@ let ToDo = (props) => {
       addTask()
     }
   }
-
 
   let changeChecked = (e, name) => {
 
@@ -98,17 +103,19 @@ let ToDo = (props) => {
   const disbaleClearAll = toDoList.length === 0;
   return (
     <>
-      <SavePopup
-        toDoList={toDoList}
-      >
-      </SavePopup>
+      <SavePopup toDoList={toDoList} />
+      <UploadPopup toDoList={toDoList} updateImportedList={updateImportedList} />
       <div className="header container">
-        <a className="button" href="#popup1">
+        <a className="button" href="#savePopup">
           <button className="saveFileView">
             SAVE
           </button>
         </a>
-        <div className="saveFileView">UPLOAD</div>
+        <a className="button" href="#uploadPopup">
+          <button className="saveFileView">
+            UPLOAD
+          </button>
+        </a>
       </div>
       <div className="row space-items">
 

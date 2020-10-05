@@ -176,3 +176,19 @@ a.button {
     margin-bottom: 10px;
     font-size: 20px;
 }
+
+.upload-space {
+    border: 2px dashed green;
+    border-radius: 10px;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.drag-drop-plus {
+    color: green;
+    font-size: 2.5rem;
+}
