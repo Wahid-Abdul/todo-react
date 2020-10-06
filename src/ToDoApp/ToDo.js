@@ -12,6 +12,8 @@ let ToDo = (props) => {
   const [toDoList, setToDoListState] = useState([]);
   const [backupToDoList, setBackupToDoList] = useState([]);
   const [shakeItemIndex, setShakeItemIndex] = useState(-1);
+  const [showSavePopup, setShowSavePopup] = useState(false);
+  const [showUploadPopup, setShowUploadPopup] = useState(false);
 
 
   let setToDoList = (toDoList) => {
@@ -103,19 +105,24 @@ let ToDo = (props) => {
   const disbaleClearAll = toDoList.length === 0;
   return (
     <>
-      <SavePopup toDoList={toDoList} />
-      <UploadPopup toDoList={toDoList} updateImportedList={updateImportedList} />
+      {showSavePopup && <SavePopup toDoList={toDoList} setShowSavePopup={setShowSavePopup} />}
+      {
+        showUploadPopup &&
+        <UploadPopup toDoList={toDoList} updateImportedList={updateImportedList}
+          setShowUploadPopup={setShowUploadPopup}
+        />
+      }
       <div className="header container">
-        <a className="button" href="#savePopup">
-          <button className="saveFileView">
-            SAVE
+        {/* <a className="button" href="#savePopup"> */}
+        <button className="saveFileView" onClick={() => { setShowSavePopup(true) }}>
+          SAVE
           </button>
-        </a>
-        <a className="button" href="#uploadPopup">
-          <button className="saveFileView">
+        {/* </a> */}
+        {/* <a className="button" href="#uploadPopup"> */}
+          <button className="saveFileView" onClick={() => { setShowUploadPopup(true) }}>
             UPLOAD
           </button>
-        </a>
+        {/* </a> */}
       </div>
       <div className="row space-items">
 

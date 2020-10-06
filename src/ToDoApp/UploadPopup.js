@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-let UploadPopup = ({ updateImportedList }) => {
+import React, { useState, useEffect } from 'react';
+let UploadPopup = ({ updateImportedList, setShowUploadPopup }) => {
 
     const [importedTasks, setImportedTasks] = useState([]);
     // const [enableDate, toggleDateFlag] = useState(false);
+
 
     let validateImportedTasks = (tasks) => {
         let isValid = true
@@ -28,6 +29,7 @@ let UploadPopup = ({ updateImportedList }) => {
     let importToDolist = () => {
         updateImportedList(importedTasks)
         setImportedTasks([])
+        setShowUploadPopup(false)
     }
 
     const dragOver = (e) => {
@@ -60,36 +62,62 @@ let UploadPopup = ({ updateImportedList }) => {
 
     }
 
+    const onReaderLoad = (event) => {
+        console.log(event.target.result);
+        let jsonData = JSON.parse(event.target.result);
+        if (validateImportedTasks(jsonData)) {
+            setImportedTasks(jsonData)
+        }
+        // closePopup();
+    }
+
+    const onChange = (event) => {
+        var reader = new FileReader();
+        reader.onload = onReaderLoad;
+        reader.readAsText(event.target.files[0]);
+    }
+
+    useEffect(() => {
+        document.getElementById('fileElem').addEventListener('change', onChange);
+    }, [])
+
+
     const disableImport = importedTasks.length === 0;
     return (
         <div id="uploadPopup" className="overlay">
             <div className="popup">
-                <a className="close" href="#">&times;</a>
-                <div className="popup-header">
+                <div className="close" onClick={() => {setShowUploadPopup(false)}}>&times;</div>
+                <div className="popup-header remove-margin">
                     Upload
                 </div>
                 <br />
-                <div
-                    onDragOver={dragOver}
-                    onDragEnter={dragEnter}
-                    onDragLeave={dragLeave}
-                    onDrop={fileDrop}
-                    className="upload-space"
-                >
-                    <div className="drag-drop-plus">+</div>
-                </div>
+                <label>
+                    <input type="file" style={{ opacity: 0, display: "none" }} id="fileElem" ></input>
+                    <div
+                        onDragOver={dragOver}
+                        onDragEnter={dragEnter}
+                        onDragLeave={dragLeave}
+                        onDrop={fileDrop}
+                        className="upload-space"
+                    >
+                        <div className="drag-drop-plus">+</div>
+                    </div>
+                </label>
                 {
-                    importedTasks.map((task, index) =>
-                        <div>{index + 1}.{task.name}</div>
+                    importedTasks.filter((i, index) => (index < 2)).map((task, index) =>
+                        <div>{index + 1}. {task.name}</div>
                     )
                 }
-                        <a className="button" href="#">
+                {
+                    importedTasks.length > 5 && '...'
+                }
+                <a className="button" href="#">
 
-                <button className={`base-button ${disableImport ? 'clear-button-disabled' : 'add-button'} col-3 col-s-12`}
-                    onClick={importToDolist}
-                    disabled={disableImport ? true : false}
-                >
-                    IMPORT
+                    <button className={`base-button ${disableImport ? 'clear-button-disabled' : 'add-button'} col-12 col-s-12 margin-left-remove`}
+                        onClick={importToDolist}
+                        disabled={disableImport ? true : false}
+                    >
+                        IMPORT
                 </button>
                 </a>
 

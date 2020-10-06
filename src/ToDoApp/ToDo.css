@@ -87,6 +87,7 @@ a.button {
     /* background-color:black; */
     display: flex;
     justify-content: flex-end;
+    /* position: fixed; */
 }
 
 .saveFileView {
@@ -98,6 +99,7 @@ a.button {
     box-sizing: border-box;
     border-radius: 10px;
     color: white;
+    cursor: pointer;
 }
 
 .overlay {
@@ -108,8 +110,8 @@ a.button {
     right: 0;
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
+    /* visibility: hidden; */
+    /* opacity: 0.81; */
     display: flex;
     align-self: center;
     align-items: center;
@@ -126,7 +128,7 @@ a.button {
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    width: 60%;
+    width: 250px;
     position: relative;
     transition: all 5s ease-in-out;
     /* display: flex; */
@@ -143,6 +145,7 @@ a.button {
     font-weight: bold;
     text-decoration: none;
     color: #333;
+    cursor: pointer;
     /* align-items: center; */
 }
 
@@ -154,7 +157,7 @@ a.button {
     width: 100%;
     border: 1px solid rgb(209, 199, 199);
     border-radius: 5px;
-    height: 30px;
+    height: 50px;
     margin-bottom: 10px;
 }
 
@@ -168,6 +171,7 @@ a.button {
     cursor: pointer;
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .popup-header {
@@ -191,4 +195,12 @@ a.button {
 .drag-drop-plus {
     color: green;
     font-size: 2.5rem;
+}
+
+.remove-margin {
+    margin-bottom: 0;
+}
+
+.margin-left-remove{
+    margin-left: 0;
 }
